@@ -6,6 +6,7 @@ import * as jwt from 'jsonwebtoken'
 import * as passport from 'passport'
 import { logger } from '../../config/logger'
 import sendMail, { IMailerHTML } from '../../config/mailer'
+import { templates } from '../../config/mailer/templateParser'
 import settings from '../../config/settings'
 import { User } from '../data/user/user.entity'
 import { hashPassword } from './helpers'
@@ -139,9 +140,11 @@ router.post(
           const data: IMailerHTML<IPasswordReset> = {
             to: user.email,
             subject: 'Password reset',
-            template: templates.,
+            template: "passwordResetTemplate",
+            params: {
             link: `http://${req.headers.host}/auth/reset/${token}`,
-            params: {}
+
+            }
           }
 
           sendMail(data, (err: any, body: any) => {
