@@ -32,10 +32,6 @@ export const connectionOptions: ConnectionOptions = {
 export default class Database {
   public connection: Connection
 
-  /**
-   * @public
-   * @memberof Database
-   */
   public async init(callback?: () => void) {
     if (!settings.dbUrl) {
       logger.warn('No DATABASE_URL environment variable is set.')

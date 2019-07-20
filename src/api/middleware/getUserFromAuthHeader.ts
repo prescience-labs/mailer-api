@@ -7,8 +7,6 @@ import { User } from '../data/user/user.entity'
 /**
  * Returns a user from an auth bearer token.
  * https://www.thepolyglotdeveloper.com/2018/07/protect-graphql-properties-jwt-nodejs-application/
- * @function
- * @param {String} bearerToken - The authorization bearer token in the format "Bearer <token>".
  */
 const getUserFromAuthHeader = async (bearerToken: string) => {
   try {

@@ -6,15 +6,7 @@ import { Between } from 'typeorm';
 import { addMinutes, format } from 'date-fns';
 import sendMail from './mailer'
 
-/**
- * @export
- * @class Cron
- */
 export default class Cron {
-  /**
-   * @static
-   * @memberof Cron
-   */
   public static init(): void {
     logger.info('Cron initialized')
     Cron.sendEmails()
