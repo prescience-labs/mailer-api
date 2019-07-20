@@ -5,11 +5,12 @@ import { check, validationResult } from 'express-validator/check'
 import * as jwt from 'jsonwebtoken'
 import * as passport from 'passport'
 import { logger } from '../../config/logger'
-import sendMail from '../../config/mailer'
+import sendMail, { IMailerHTML } from '../../config/mailer'
 import settings from '../../config/settings'
 import { User } from '../data/user/user.entity'
 import { hashPassword } from './helpers'
 import { isAuthenticated } from './passport'
+import { IPasswordReset } from 'src/config/mailer/templates/passwordResetRequest/passwordResetRequest';
 
 const ONE_HOUR: number = 3600000
 const router: Router = Router()
@@ -135,11 +136,12 @@ router.post(
 
           await user.save()
 
-          const data = {
+          const data: IMailerHTML<IPasswordReset> = {
             to: user.email,
             subject: 'Password reset',
-            template: 'passwordResetRequest',
+            template: templates.,
             link: `http://${req.headers.host}/auth/reset/${token}`,
+            params: {}
           }
 
           sendMail(data, (err: any, body: any) => {
@@ -205,6 +207,7 @@ router.post(
         to: user.email,
         subject: 'Password has been reset',
         text: `Your password has been reset at http://${req.headers.host}`,
+        params:{}
       }
 
       sendMail(data, (err: any, body: any) => {
