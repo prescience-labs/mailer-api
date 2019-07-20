@@ -1,8 +1,9 @@
 import * as fs from 'fs'
 import * as handlebars from 'handlebars'
 
-enum templates {
+export enum templates {
   passwordResetTemplate = 'passwordResetRequest',
+  reviewInvitation = 'reviewInvitation',
 }
 export default <T>(template: keyof typeof templates, params: T) => {
   const templateDir = 'src/config/mailer/templates'
