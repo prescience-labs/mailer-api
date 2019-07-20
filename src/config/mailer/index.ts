@@ -39,7 +39,7 @@ const transporter = nodemailer.createTransport(transporterConfig)
 /**
  *
  */
-export default (opts: MailerArgs, done?: CallableFunction) => {
+export default (opts: MailerArgs, done: CallableFunction = () => {}) => {
   const data: any = opts
   logger.silly('Email config:')
   logger.silly(transporterConfig)
