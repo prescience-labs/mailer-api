@@ -81,7 +81,7 @@ yarn dev
 There is also a full [docker-compose](https://docs.docker.com/compose/) development file ([docker-compose.development.yml](./docker-compose.development.yml)). Running this will spin up a full development environment. **All code will be tested against this dev environment.**
 
 ```cli
-docker-compose -f docker-compose.development.yml up
+docker-compose up
 ```
 
 #### Adding a new entity
@@ -89,7 +89,7 @@ docker-compose -f docker-compose.development.yml up
 Run the following from the root of the api:
 
 ```cli
-yarn create:entity <entityName>
+yarn cli create:entity <entityName>
 ```
 
 This will add a new directory under [/src/api/data](./src/api/data/) containing a new, working entity. GraphQL will automagically pick it up and register it with the schema.

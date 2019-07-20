@@ -36,9 +36,6 @@ const transporterConfig = {
 
 const transporter = nodemailer.createTransport(transporterConfig)
 
-/**
- *
- */
 export default (opts: MailerArgs, done?: CallableFunction) => {
   const data: any = opts
   logger.silly('Email config:')
@@ -52,7 +49,7 @@ export default (opts: MailerArgs, done?: CallableFunction) => {
   if (data.template) {
     // this email is an html email
     logger.debug('Sending an HTML email')
-    data.html = parse(data.template, data.link)
+    data.html = parse(data.template, data)
   } else {
     // this email is a plain text email
     logger.debug('Sending a plain text email')

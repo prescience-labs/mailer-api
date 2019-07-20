@@ -6,10 +6,6 @@ import Database from './config/db'
 import { logger } from './config/logger'
 import settings from './config/settings'
 
-/**
- * @export
- * @class Server
- */
 export default class Server {
   private httpServer: any
   private db: Database = new Database()
@@ -19,8 +15,6 @@ export default class Server {
    * Initialize the server. This can be called from anywhere, including tests,
    * to scaffold out the full server. callback() is an optional parameter mostly
    * used to pass done() in testing.
-   * @public
-   * @memberof Server
    */
   public async up(
     dbInitializedSeparately: boolean = false,
@@ -58,8 +52,6 @@ export default class Server {
   /**
    * Close the server. Pass a callback (mostly used to close the server in
    * tests).
-   * @public
-   * @memberof Server
    */
   public async down(callback?: () => void) {
     if (!this.dbInitializedSeparately) {

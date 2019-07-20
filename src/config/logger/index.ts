@@ -6,8 +6,6 @@ import { Loggly } from 'winston-loggly-bulk'
 import settings from '../settings'
 import { SentryTransport } from './sentry'
 
-// const chalk: any = chalkImport // fix import error with chalk
-
 export const logger = winston.createLogger({
   level: settings.logLevel || 'warn',
   format: winston.format.combine(
@@ -36,7 +34,7 @@ logger.add(
             level = chalk.bgHex('FF851B').bold(level)
             break
           case 'info':
-            level = chalk.bgHex('001F3F').bold(level)
+            level = chalk.bgHex('0074D9').bold(level)
             break
           case 'verbose':
             level = chalk.bgHex('FFDC00').bold(level)

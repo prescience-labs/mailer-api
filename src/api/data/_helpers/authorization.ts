@@ -5,9 +5,6 @@ export { PermissionValues } from '../permission/permission.entity'
 
 /**
  * Throws an error if a user doesn't have the proper permissions.
- * @function
- * @param {User} user
- * @param {string} permissionValue - the permission required from permission.PermissionValues
  * Checks the given user's permissions via the roles assigned to that user. If
  * the user has the permission `permissionValue` somewhere within its granted
  * permissions, return true. Otherwise, throw an ForbiddenError.
