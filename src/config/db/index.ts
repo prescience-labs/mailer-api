@@ -13,7 +13,7 @@ export const connectionOptions: ConnectionOptions = {
 
   // only drop schema in test environment; this keeps tests separate
   dropSchema: isTestDb,
-
+  ssl:true,
   synchronize: false,
   migrationsRun: true,
   entityPrefix: settings.dbTablePrefix,
@@ -43,7 +43,7 @@ export default class Database {
     logger.silly('Database connection options:')
     logger.silly(connectionOptions)
     this.connection = await createConnection(connectionOptions)
-
+    
     /**
      * Hooks
      * These functions will run upon each connect to the database.

@@ -1,7 +1,7 @@
 import * as nodemailer from 'nodemailer'
 import { logger } from '../logger'
 import settings from '../settings'
-import parse from './templateParser'
+import parse, { templates } from './templateParser'
 
 /**
  * You can either pass in a `text` parameter or you can pass in a `template` and
@@ -13,14 +13,14 @@ interface IMailer {
   from?: string
   subject: string
 }
-interface IMailerText extends IMailer {
+export interface IMailerText extends IMailer {
   text: string
 }
-interface IMailerHTML extends IMailer {
-  template: string
-  link: string
+export interface IMailerHTML<T> extends IMailer {
+  template: keyof typeof templates
+  params: T
 }
-type MailerArgs = IMailerText | IMailerHTML
+type MailerArgs<T> = IMailerText | IMailerHTML<T>
 
 const transporterConfig = {
   pool: false,
@@ -36,7 +36,10 @@ const transporterConfig = {
 
 const transporter = nodemailer.createTransport(transporterConfig)
 
-export default (opts: MailerArgs, done?: CallableFunction) => {
+/**
+ *
+ */
+export default <T>(opts: MailerArgs<T>, done: CallableFunction = () => {}) => {
   const data: any = opts
   logger.silly('Email config:')
   logger.silly(transporterConfig)
@@ -49,7 +52,7 @@ export default (opts: MailerArgs, done?: CallableFunction) => {
   if (data.template) {
     // this email is an html email
     logger.debug('Sending an HTML email')
-    data.html = parse(data.template, data)
+    data.html = parse<T>(data.template, data)
   } else {
     // this email is a plain text email
     logger.debug('Sending a plain text email')
