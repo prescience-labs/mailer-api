@@ -1,11 +1,14 @@
 import * as fs from 'fs'
 import * as handlebars from 'handlebars'
 
-export default (filename: string, link: string) => {
+enum templates {
+  passwordResetTemplate = 'passwordResetRequest',
+}
+export default <T>(template: keyof typeof templates, params: T) => {
   const templateDir = 'src/config/mailer/templates'
 
-  const source = fs.readFileSync(`${templateDir}/${filename}.hbs`).toString()
-  const template = handlebars.compile(source)
+  const source = fs.readFileSync(`${templateDir}/${template}/${template}.hbs`).toString()
+  const compiledTemplate = handlebars.compile(source)
 
-  return template({ link })
+  return compiledTemplate(params)
 }
