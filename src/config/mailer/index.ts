@@ -52,7 +52,7 @@ export default <T>(opts: MailerArgs<T>, done: CallableFunction = () => {}) => {
   if (data.template) {
     // this email is an html email
     logger.debug('Sending an HTML email')
-    data.html = parse<T>(data.template, data)
+    data.html = parse<T>(data.template, data.params)
   } else {
     // this email is a plain text email
     logger.debug('Sending a plain text email')
