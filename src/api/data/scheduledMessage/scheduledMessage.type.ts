@@ -15,6 +15,9 @@ const ScheduledMessage = gql`
     recipientEmail: String!
     recipientName: String
   }
+  input ReviewRequestData {
+    link: String!
+  }
 `
 
 export const types = () => [ScheduledMessage]

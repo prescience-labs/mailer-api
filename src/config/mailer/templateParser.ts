@@ -4,6 +4,7 @@ import * as handlebars from 'handlebars'
 export enum templates {
   passwordResetTemplate = 'passwordResetRequest',
   reviewInvite = 'reviewInvite',
+  reviewRequest = 'reviewRequest',
 }
 export default <T>(template: keyof typeof templates, params: T) => {
   const templateDir = 'src/config/mailer/templates'
