@@ -13,7 +13,7 @@ import { templates } from '../../../config/mailer/templateParser'
 const Mutation = gql`
   extend type Mutation {
     createScheduledMessage(messageData: ScheduledMessageInput!): ScheduledMessage
-    reviewRequest(emailData: ReviewRequestData): Boolean
+    createReviewRequest(emailData: ReviewRequestData): Boolean
   }
 `
 
@@ -41,7 +41,7 @@ export const mutationResolvers = {
       pubsub.publish(subscriptions.SCHEDULEDMESSAGE_ADDED, scheduledMessage)
       return scheduledMessage
     },
-    async reviewRequest(obj, { emailData }, context, info) {
+    async createReviewRequest(obj, { emailData }, context, info) {
        const data: IMailerHTML<any> = {
         to: emailData.emailTo,
         subject: 'Review Request!',
