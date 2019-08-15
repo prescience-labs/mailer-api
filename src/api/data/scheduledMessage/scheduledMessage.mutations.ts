@@ -41,13 +41,13 @@ export const mutationResolvers = {
       pubsub.publish(subscriptions.SCHEDULEDMESSAGE_ADDED, scheduledMessage)
       return scheduledMessage
     },
-    async reviewRequest(obj, { messageData }, context, info) {
+    async reviewRequest(obj, { emailData }, context, info) {
        const data: IMailerHTML<any> = {
-        to: 'tpll5wiiajplpxd6@ethereal.email',
+        to: emailData.emailTo,
         subject: 'Review Request!',
         template: templates.reviewRequest,
         params: {
-          link: 'https://altamir.io',
+          link: emailData.link,
         },
       }
       sendMail(data, (err, body) => {

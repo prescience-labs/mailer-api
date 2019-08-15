@@ -17,6 +17,7 @@ const ScheduledMessage = gql`
   }
   input ReviewRequestData {
     link: String!
+    emailTo: String!
   }
 `
 
